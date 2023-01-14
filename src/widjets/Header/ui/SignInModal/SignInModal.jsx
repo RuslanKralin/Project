@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Typography, Modal } from '@mui/material'
+import { Box, Button, Modal, TextField } from '@mui/material'
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
 // import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
@@ -15,10 +15,16 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    display: 'flex',
+    gap: '30px',
+    flexDirection: 'column'
 };
 
 function SignInModal() {
     const [open, setOpen] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, SetPassword] = useState('');
+    const [confirm, SetConfirm] = useState('');
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -27,7 +33,7 @@ function SignInModal() {
             <Button onClick={handleOpen} variant="outlined" startIcon={<AssignmentIndIcon />}>
                 Sign in
             </Button>
-            {/* <Button onClick={handleOpen}>Open modal</Button> */}
+            
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -35,13 +41,29 @@ function SignInModal() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typogratihy id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                    </Typogratihy>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                </Box>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Email"
+                        defaultValue=" "
+                    />
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Password"
+                        defaultValue=" "
+                    />
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Confirm"
+                        defaultValue=" "
+                    />
+
+                    <Button variant="contained" color="success">
+                        SIGN IN
+                    </Button>
+                 </Box>
             </Modal>
         </div>
     );
