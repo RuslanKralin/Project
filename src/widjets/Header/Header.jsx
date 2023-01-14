@@ -1,8 +1,10 @@
 import { Button, Box } from '@mui/material'
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+// import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/consts/routes';
+
+import { SignInModal } from './ui';
 
 
 
@@ -25,9 +27,10 @@ function Header() {
                     </Link>
                 </Box>
                 <Box sx={{ display: 'flex', gap: '20px' }}>
-                    <Button variant="outlined" startIcon={<AssignmentIndIcon />}>
+                    {/* <Button variant="outlined" startIcon={<AssignmentIndIcon />}>
                         Sign in
-                    </Button>
+                    </Button> */}
+                    <SignInModal />
                     <Button variant="contained" endIcon={<ExitToAppIcon />}>
                         Sign up
                     </Button>
