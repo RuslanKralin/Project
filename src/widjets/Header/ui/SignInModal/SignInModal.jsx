@@ -55,10 +55,15 @@ function SignInModal() {
                                 //     errors.email = 'Invalid email address';
                             } else if (values.email.length > 30) {
                                 errors.email = 'More then 30!!!'
-                            } else if (values.password !=values.confirm){
-                                errors.confirm  = 'Check your password please'
+
+                            } else if (values.password.length < 6) {
+                                errors.password = 'Less then 6!!!'
+                            }
+                            else if (values.password != values.confirm) {
+                                errors.confirm = 'Check your password please'
                             }
                             return errors;
+
                         }}
                         onSubmit={(values) => {
                             console.log(values)
@@ -77,12 +82,36 @@ function SignInModal() {
                         }) => (
                             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                                 <TextField
+                                    type="text"
+                                    name="text"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.name}
+                                    label="Name"
+                                />
+                                <TextField
+                                    type="text"
+                                    name="text"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.secondName}
+                                    label="Second name"
+                                />
+
+
+                                <TextField
+                                id='email'
                                     type="email"
                                     name="email"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.email}
                                     label="Email"
+                                    style={
+                                        errors.email && touched.email
+                                            ? { border: '2px solid #ff1f44' }
+                                            : {  }
+                                    }
                                 />
 
                                 {errors.email && touched.email && errors.email}
@@ -94,7 +123,7 @@ function SignInModal() {
                                     value={values.password}
                                     label="Password"
                                 />
-
+                                {errors.password && touched.password && errors.password}
                                 <TextField
                                     type="password"
                                     name="confirm"
@@ -103,10 +132,10 @@ function SignInModal() {
                                     value={values.confirm}
                                     label="Confirm"
                                 />
-                               {errors.confirm && touched.confirm && errors.confirm}
+                                {errors.confirm && touched.confirm && errors.confirm}
                                 <Button type="submit" variant="contained" color="success" disabled={isSubmitting}>
                                     Submit
-                                    
+
                                 </Button>
                             </form>
                         )}
