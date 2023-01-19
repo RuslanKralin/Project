@@ -4,7 +4,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/consts/routes';
 
-import { SignInModal } from './ui';
+import { SignInModal, SignUpModal } from './ui';
 
 
 
@@ -12,8 +12,8 @@ import { SignInModal } from './ui';
 function Header() {
     return (
         <>
-            <Box sx={{ display: 'flex', justifyContent:'space-between' }}>
-            {' '}
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                {' '}
                 <Box sx={{ display: 'flex', gap: '20px' }}>
                     <Link to={ROUTES.HOME}>
                         <Button>
@@ -31,9 +31,8 @@ function Header() {
                         Sign in
                     </Button> */}
                     <SignInModal />
-                    <Button variant="contained" endIcon={<ExitToAppIcon />}>
-                        Sign up
-                    </Button>
+                    <SignUpModal />
+
                 </Box>
             </Box>
         </>

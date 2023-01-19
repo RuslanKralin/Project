@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { Box, Button, Modal, TextField } from '@mui/material'
+import { Box, Button, Modal } from '@mui/material'
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
 import { Formik } from 'formik';
-import { display } from '@mui/system';
+import * as yup from 'yup'
+import { FormInput } from 'shared/ui';
+// import { Stack } from '@mui/system';
+// import { display } from '@mui/system';
 // import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
 // import Modal from '@mui/material/Modal';
@@ -23,12 +26,21 @@ const style = {
 };
 
 function SignInModal() {
+    const validationSchema = yup.object().shape({
+        name: yup.string().required('Обязательно имяяяя'),
+        secondName: yup.string().typeError('Только буквы').required('Обязательно'),
+        email: yup.string().email('Введите верный email бля').required('Обязательно'),
+        password: yup.string()
+            .min(3, 'Too short!')
+            .max(12, 'Too long!')
+            .required('Обязательно'),
+        confirm: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательно')
+    })
+
     const [open, setOpen] = useState(false);
-    // const [email, setEmail] = useState('');
-    // const [password, SetPassword] = useState('');
-    // const [confirm, SetConfirm] = useState('');
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
 
     return (
         <div>
@@ -44,31 +56,18 @@ function SignInModal() {
             >
                 <Box sx={style}>
                     <Formik
-                        initialValues={{ email: '', password: '', confirm: '' }}
-                        validate={values => {
-                            const errors = {};
-                            if (values.email.length < 3) {
-                                errors.email = 'Less then 3';
-                                // } else if (
-                                //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                                // ) {
-                                //     errors.email = 'Invalid email address';
-                            } else if (values.email.length > 30) {
-                                errors.email = 'More then 30!!!'
-
-                            } else if (values.password.length < 6) {
-                                errors.password = 'Less then 6!!!'
-                            }
-                            else if (values.password != values.confirm) {
-                                errors.confirm = 'Check your password please'
-                            }
-                            return errors;
-
+                        initialValues={{
+                            name: '',
+                            secondName: '',
+                            email: '',
+                            password: '',
+                            confirm: ''
                         }}
                         onSubmit={(values) => {
                             console.log(values)
 
                         }}
+                        validationSchema={validationSchema}
                     >
                         {({
                             values,
@@ -81,59 +80,18 @@ function SignInModal() {
                             /* and other goodies */
                         }) => (
                             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                                <TextField
-                                    type="text"
-                                    name="text"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.name}
-                                    label="Name"
-                                />
-                                <TextField
-                                    type="text"
-                                    name="text"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.secondName}
-                                    label="Second name"
-                                />
 
+                                <FormInput name="name" />
+                                {/* <FormInput name="secondName" /> */}
+                                {/* <FormInput name="email" /> */}
+                                <FormInput name="password" />
+                                {/* <FormInput name="confirm" /> */}
 
-                                <TextField
-                                id='email'
-                                    type="email"
-                                    name="email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                    label="Email"
-                                    style={
-                                        errors.email && touched.email
-                                            ? { border: '2px solid #ff1f44' }
-                                            : {  }
-                                    }
-                                />
-
-                                {errors.email && touched.email && errors.email}
-                                <TextField
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                    label="Password"
-                                />
-                                {errors.password && touched.password && errors.password}
-                                <TextField
-                                    type="password"
-                                    name="confirm"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.confirm}
-                                    label="Confirm"
-                                />
-                                {errors.confirm && touched.confirm && errors.confirm}
-                                <Button type="submit" variant="contained" color="success" disabled={isSubmitting}>
+                                <Button
+                                    onClick={handleSubmit}
+                                    variant="contained"
+                                    color="success"
+                                    disabled={isSubmitting}>
                                     Submit
 
                                 </Button>
@@ -148,25 +106,3 @@ function SignInModal() {
 
 export default SignInModal
 
-{/* <TextField
-                        required
-                        id="outlined-required"
-                        label="Email"
-                        defaultValue=" "
-                    />
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Password"
-                        defaultValue=" "
-                    />
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Confirm"
-                        defaultValue=" "
-                    />
-
-                    <Button variant="contained" color="success">
-                        SIGN IN
-                    </Button> */}
