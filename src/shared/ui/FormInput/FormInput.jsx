@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { useFormikContext } from "formik";
 
 
-function FormInput({ name }) {
+function FormInput({ name,label}) {
    const {handleChange, handleBlur, values, errors, touched} = useFormikContext()// должен находится именно внутри. это условие этого хука
    
     return (
@@ -11,7 +11,7 @@ function FormInput({ name }) {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values[name]}
-            label={name}
+            label={label || name} // если  name есть то он вправо не бкдет смотреть
             variant='outlined'
         />
             <div style={{ color: 'red' }}>

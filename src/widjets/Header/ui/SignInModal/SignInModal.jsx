@@ -4,11 +4,7 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
 import { Formik } from 'formik';
 import * as yup from 'yup'
 import { FormInput } from 'shared/ui';
-// import { Stack } from '@mui/system';
-// import { display } from '@mui/system';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-// import Modal from '@mui/material/Modal';
+
 
 const style = {
     position: 'absolute',
@@ -27,11 +23,14 @@ const style = {
 
 function SignInModal() {
     const validationSchema = yup.object().shape({
-        name: yup.string().required('Обязательно имяяяя'),
+        name: yup.string()
+            .min(2, 'Too short!')
+            .max(12, 'Too long!')
+            .required('Обязательно имя'),
         secondName: yup.string().typeError('Только буквы').required('Обязательно'),
         email: yup.string().email('Введите верный email бля').required('Обязательно'),
         password: yup.string()
-            .min(3, 'Too short!')
+            .min(6, 'Too short!')
             .max(12, 'Too long!')
             .required('Обязательно'),
         confirm: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательно')
@@ -82,11 +81,8 @@ function SignInModal() {
                             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
 
                                 <FormInput name="name" />
-                                {/* <FormInput name="secondName" /> */}
-                                {/* <FormInput name="email" /> */}
                                 <FormInput name="password" />
-                                {/* <FormInput name="confirm" /> */}
-
+  
                                 <Button
                                     onClick={handleSubmit}
                                     variant="contained"
