@@ -11,7 +11,9 @@ const experience = [
     {key:'two', value: 2},
     {key:'three', value: 3},
     {key:'four', value: 4},
-    {key:'five', value: 5}   
+    {key:'five', value: 5},   
+    {key:'six', value: 6} ,  
+    {key:'seven', value: 7},   
 ]
 
 const style = {
@@ -43,7 +45,9 @@ const validationSchema = yup.object().shape({
         .max(12, 'Too long!')
         .required('Обязательно'),
     confirm: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательно'),
-    // Age: yup.string().required('Введите возраст')// не работает
+    experience:yup.string().required('Обязательно'),
+    male: yup.string().required('Обязательно'),
+    age: yup.string().required('Введите возраст')// не работает
 })
 
 function SignUpModal() {
@@ -101,7 +105,7 @@ function SignUpModal() {
 
                             /* and other goodies */
                         }) => (
-                            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
                                 <FormInput name="name" label='Name' />
                                 <FormInput name="secondName" label='Second name' />

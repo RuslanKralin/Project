@@ -27,13 +27,13 @@ function SignInModal() {
             .min(2, 'Too short!')
             .max(12, 'Too long!')
             .required('Обязательно имя'),
-        secondName: yup.string().typeError('Только буквы').required('Обязательно'),
-        email: yup.string().email('Введите верный email бля').required('Обязательно'),
+        // secondName: yup.string().typeError('Только буквы').required('Обязательно'),
+        // email: yup.string().email('Введите верный email бля').required('Обязательно'),
         password: yup.string()
             .min(6, 'Too short!')
             .max(12, 'Too long!')
             .required('Обязательно'),
-        confirm: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательно')
+        // confirm: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательно')
     })
 
     const [open, setOpen] = useState(false);
@@ -57,23 +57,24 @@ function SignInModal() {
                     <Formik
                         initialValues={{
                             name: '',
-                            secondName: '',
-                            email: '',
+                            // secondName: '',
+                            // email: '',
                             password: '',
-                            confirm: ''
+                            // confirm: ''
                         }}
+                        validationSchema={validationSchema}
                         onSubmit={(values) => {
                             console.log(values)
 
                         }}
-                        validationSchema={validationSchema}
+
                     >
                         {({
-                            values,
-                            errors,
-                            touched,
-                            handleChange,
-                            handleBlur,
+                            // values,
+                            // errors,
+                            // touched,
+                            // handleChange,
+                            // handleBlur,
                             handleSubmit,
                             isSubmitting,
                             /* and other goodies */
@@ -82,15 +83,16 @@ function SignInModal() {
 
                                 <FormInput name="name" />
                                 <FormInput name="password" />
-  
+
                                 <Button
                                     onClick={handleSubmit}
                                     variant="contained"
                                     color="success"
-                                    disabled={isSubmitting}>
+                                >
                                     Submit
-
+                                    
                                 </Button>
+                                
                             </form>
                         )}
                     </Formik>

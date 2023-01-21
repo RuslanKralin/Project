@@ -1,6 +1,6 @@
 import { Button, Box } from '@mui/material'
 // import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+// import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/consts/routes';
 
@@ -23,6 +23,11 @@ function Header() {
                     <Link to={ROUTES.POSTS}>
                         <Button>
                             Posts
+                        </Button>
+                    </Link>
+                    <Link to={ROUTES.STATS}>
+                        <Button>
+                            Stats
                         </Button>
                     </Link>
                 </Box>
