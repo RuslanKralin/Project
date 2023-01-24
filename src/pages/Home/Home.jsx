@@ -1,10 +1,12 @@
 import { Button, Card, CardActions, CardContent, CardMedia, LinearProgress, Typography } from "@mui/material"
-import axios from "axios"
+// import axios from "axios"
+import { observer } from "mobx-react-lite"
 // import { useEffect } from "react"
-import { useState } from "react"
+// import { useState } from "react"
+import HomeModel from "./model/Home.model"
 
 
-const URL = 'https://www.boredapi.com/api/activity'
+
 
 // function fetchActivity(){
 //     fetch(URL).then((res)=>{
@@ -15,18 +17,18 @@ const URL = 'https://www.boredapi.com/api/activity'
 // }
 
 function Home() {
-    const [action, setAction] = useState({})
-    const [loading, setLoading] = useState(false)
+    // const [action, setAction] = useState({})
+    // const [loading, setLoading] = useState(false)
 
-    const getAction = () => {
-        setLoading(true)
-        axios.get(URL)
-            .then((res) => {
-                console.log(res.data)
-                setAction(res.data)
-                setLoading(false)
-            })
-    }
+    // const getAction = () => {
+    //     setLoading(true)
+    //     axios.get(URL)
+    //         .then((res) => {
+    //             console.log(res.data)
+    //             setAction(res.data)
+    //             setLoading(false)
+    //         })
+    // }
 
     return (
         <>
@@ -37,25 +39,25 @@ function Home() {
                     title="react"
                 />
 
-                {loading ? <LinearProgress color="secondary" /> : <CardContent>
+                {HomeModel.loading ? <LinearProgress color="secondary" /> : <CardContent>
 
                     <Typography gutterBottom variant="h5" component="div">
-                        {action.type}
+                        {HomeModel.action.type}
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary">
-                        {action.activity}
+                        {HomeModel.action.activity}
                     </Typography>
 
                 </CardContent>}
 
 
-                <CardActions>
-                    <Button size="small" onClick={getAction}>Get new action</Button>
+                <CardActions >
+                    <Button size="small" onClick={HomeModel.init}>Get new action</Button>
                 </CardActions>
             </Card>
         </>
     )
 }
 
-export default Home
+export default observer(Home)

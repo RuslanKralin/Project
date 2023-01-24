@@ -1,8 +1,9 @@
 
 import { LinearProgress } from "@mui/material"
-import axios from "axios"
-import { useEffect } from "react"
-import { useState } from "react"
+
+import { observer } from "mobx-react-lite"
+import { StatsModel } from "./model"
+
 import MuiTable from "./ui/Table/MuiTable"
 
 
@@ -25,7 +26,7 @@ import MuiTable from "./ui/Table/MuiTable"
 
 // rows.forEach((item) => console.log(item))
 
-const STATS_URL = 'https://datausa.io/api/data?drilldowns=Nation&measures=Population'
+
 
 // function fetchStats() {
 //     fetch(STATS_URL).then((res) => {
@@ -39,13 +40,13 @@ const STATS_URL = 'https://datausa.io/api/data?drilldowns=Nation&measures=Popula
 
 function Stats() {
 
-    const [stats, setStats] = useState([])
-    const [loading, setLoading] = useState(false)
+    // const [stats, setStats] = useState([])
+    // const [loading, setLoading] = useState(false)
     // Важно! Stats хранит в себе статистику. Если не поставить изначально пустой массив, то при map будет ошибка(не может мапить 
     //     underfind). Есть выход ещё {stats?.map((item) => ...   тогда будет работать
 
     //  помогает делать что то в зависимости от чего то useEffect
-    useEffect(() => {
+    // useEffect(() => {
         // fetch(STATS_URL).then((res) => {
         //     return res.json()
         // }).then((res) => {
@@ -54,26 +55,29 @@ function Stats() {
         // })
 
         // Альтернатива через AXIOS (предоставляет обвёртку в которой можно много с чем работать)
-        setLoading(true)
-        axios.get(STATS_URL)
-            .then(function (response) {
-                console.log(response.data)
-                setStats(response.data.data)
-                setLoading(false)
-            })
-    }, [])// вторым параметром принимает массив. С пустым массивом отраьотае 1раз когда загрузится страница
+        // setLoading(true)
+        // axios.get(STATS_URL)
+        //     .then(function (response) {
+        //         console.log(response.data)
+        //         setStats(response.data.data)
+        //         setLoading(false)
+        //     })
+    // }, [])// вторым параметром принимает массив. С пустым массивом отраьотае 1раз когда загрузится страница
 
 
 
     return (
         <>
-            {loading ?
+        <h1>Statistics</h1>
+
+            {StatsModel.loading ?
                 (<LinearProgress color="secondary" />)
                 : (
-                    <MuiTable stats={stats} />
+                    <MuiTable stats={StatsModel.stats} />
                 )}
         </>
     )
 }
 
-export default Stats
+export default observer(Stats)// этим мы сказали что эта компонента зависит от состояния  состояния mobx, когда оно будет 
+//меняться будет rerender
