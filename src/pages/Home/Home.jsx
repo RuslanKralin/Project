@@ -1,5 +1,7 @@
 import { Button, Card, CardActions, CardContent, CardMedia, LinearProgress, Typography } from "@mui/material"
 // import axios from "axios"
+
+// import axios from "axios"
 import { observer } from "mobx-react-lite"
 // import { useEffect } from "react"
 // import { useState } from "react"
@@ -7,7 +9,7 @@ import HomeModel from "./model/Home.model"
 
 
 
-
+// const URL = 'https://www.boredapi.com/api/activity'
 // function fetchActivity(){
 //     fetch(URL).then((res)=>{
 //         return res.json()
@@ -17,16 +19,15 @@ import HomeModel from "./model/Home.model"
 // }
 
 function Home() {
-    // const [action, setAction] = useState({})
+    // const [ setAction] = useState({})
     // const [loading, setLoading] = useState(false)
 
     // const getAction = () => {
-    //     setLoading(true)
+    //     HomeModel.loading = (true)
     //     axios.get(URL)
     //         .then((res) => {
-    //             console.log(res.data)
     //             setAction(res.data)
-    //             setLoading(false)
+    //             HomeModel.loading= false
     //         })
     // }
 
@@ -40,7 +41,7 @@ function Home() {
                 />
 
                 {HomeModel.loading ? <LinearProgress color="secondary" /> : <CardContent>
-
+                
                     <Typography gutterBottom variant="h5" component="div">
                         {HomeModel.action.type}
                     </Typography>
@@ -53,7 +54,8 @@ function Home() {
 
 
                 <CardActions >
-                    <Button size="small" onClick={HomeModel.init}>Get new action</Button>
+                    <Button size="small" onClick={HomeModel.getAction}>Get new action</Button> 
+                    {/* на onclick вызывается функция(тут Рома делал ()=>HomeModel.getAction) вызывал её через callBack чтобы не потерять контекст */}
                 </CardActions>
             </Card>
         </>

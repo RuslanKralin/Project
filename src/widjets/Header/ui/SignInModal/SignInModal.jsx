@@ -4,6 +4,7 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
 import { Formik } from 'formik';
 import * as yup from 'yup'
 import { FormInput } from 'shared/ui';
+import UserModel from 'modals/User.model';
 
 
 const style = {
@@ -65,6 +66,10 @@ function SignInModal() {
                         validationSchema={validationSchema}
                         onSubmit={(values) => {
                             console.log(values)
+                            UserModel.signIn(values)// тут ьы вызвали метод у модели. Это альтернатива нижним двум строчкам
+                            
+                            // UserModel.name = values.name
+                            // UserModel.password = values.password
 
                         }}
 

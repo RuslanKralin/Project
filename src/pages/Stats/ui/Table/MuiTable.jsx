@@ -6,6 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Button } from '@mui/material';
+import { observer } from 'mobx-react-lite';
+import { UserModel } from 'modals';
+import { HomeModel } from 'pages/Home/model';
 
 
 function MuiTable({ stats }) {
@@ -20,6 +24,7 @@ function MuiTable({ stats }) {
                             <TableCell>ID Nation</TableCell>
                             <TableCell align="right">Year</TableCell>
                             <TableCell align="right">Population</TableCell>
+                            <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -34,15 +39,20 @@ function MuiTable({ stats }) {
                                 </TableCell>
                                 <TableCell align="right">{item.Year}</TableCell>
                                 <TableCell align="right">{item.Population}</TableCell>
+                                <TableCell align="right"><Button onClick={()=>{
+                                    UserModel.name = item.Population
+                                        }}
+                                        variant = 'contained' >push</Button></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+            {HomeModel.action.activity}
         </>
 
     );
 }
 
-export default MuiTable
+export default observer (MuiTable)
 

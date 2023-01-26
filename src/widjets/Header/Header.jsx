@@ -1,4 +1,6 @@
-import { Button, Box } from '@mui/material'
+import { Button, Box, Typography } from '@mui/material'
+import { observer } from 'mobx-react-lite';
+import UserModal from 'modals/User.model';
 // import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 // import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Link } from 'react-router-dom';
@@ -31,6 +33,7 @@ function Header() {
                         </Button>
                     </Link>
                 </Box>
+                <Typography>{UserModal.name}</Typography>
                 <Box sx={{ display: 'flex', gap: '20px' }}>
                     {/* <Button variant="outlined" startIcon={<AssignmentIndIcon />}>
                         Sign in
@@ -44,5 +47,5 @@ function Header() {
     )
 }
 
-export default Header
+export default observer (Header)
 
