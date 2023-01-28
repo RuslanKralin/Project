@@ -1,6 +1,6 @@
 import { Button, Box, Typography, Avatar } from '@mui/material'
 import { observer } from 'mobx-react-lite';
-import UserModal from 'modals/User.model';
+import UserModel from 'modals/User.model';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/consts/routes';
 
@@ -31,19 +31,20 @@ function Header() {
                         </Button>
                     </Link>
                 </Box>
-                <Typography>{UserModal.name}</Typography>
+                <Typography>{UserModel.name}</Typography>
                 <Box sx={{ display: 'flex', gap: '20px' }}>
-                  
-                    <SignInModal />
-                    <SignUpModal />
-                    <Link to={ROUTES.PROFILE}> 
-                    <Avatar alt="Travis Howard" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNTm_W1tsgC3Dvt4S8tV_GbmIkwBPLkFR7eg&usqp=CAU" />
-                    </Link>
+
+
+                    {UserModel.isLoggedIn() ? <Link to={ROUTES.PROFILE}>
+                        <Avatar alt="Travis Howard" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNTm_W1tsgC3Dvt4S8tV_GbmIkwBPLkFR7eg&usqp=CAU" />
+                    </Link> : <><SignInModal /> <SignUpModal /></>}
+
+
                 </Box>
             </Box>
         </>
     )
 }
 
-export default observer (Header)
+export default observer(Header)
 

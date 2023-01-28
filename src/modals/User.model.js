@@ -4,7 +4,7 @@ import { makeAutoObservable } from 'mobx'
 
 
 class UserModel {
-   name = 'не зарегестрирован'
+   name = ''
    password = ''
    email = ''
     constructor() {
@@ -16,6 +16,16 @@ class UserModel {
         this.name = name
         this.password = password
         this.email = email
+    }
+
+    isLoggedIn() {
+        return Boolean(this.name)
+    }
+
+    logOut(){
+        this.name = ''
+        this.password = ''
+        this.email = ''
     }
 }
 
