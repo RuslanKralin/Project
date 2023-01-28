@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup'
 import { FormInput } from 'shared/ui';
 import UserModel from 'modals/User.model';
+import { nameValidation, passwordValidation } from 'shared/helpers';
 
 
 const style = {
@@ -24,17 +25,8 @@ const style = {
 
 function SignInModal() {
     const validationSchema = yup.object().shape({
-        name: yup.string()
-            .min(2, 'Too short!')
-            .max(12, 'Too long!')
-            .required('Обязательно имя'),
-        // secondName: yup.string().typeError('Только буквы').required('Обязательно'),
-        // email: yup.string().email('Введите верный email бля').required('Обязательно'),
-        password: yup.string()
-            .min(6, 'Too short!')
-            .max(12, 'Too long!')
-            .required('Обязательно'),
-        // confirm: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательно')
+        name: nameValidation(),
+        password: passwordValidation()
     })
 
     const [open, setOpen] = useState(false);
@@ -58,18 +50,15 @@ function SignInModal() {
                     <Formik
                         initialValues={{
                             name: '',
-                            // secondName: '',
-                            // email: '',
                             password: '',
-                            // confirm: ''
                         }}
                         validationSchema={validationSchema}
                         onSubmit={(values) => {
                             console.log(values)
                             UserModel.signIn(values)// тут ьы вызвали метод у модели. Это альтернатива нижним двум строчкам
                             
-                            // UserModel.name = values.name
-                            // UserModel.password = values.password
+                            UserModel.name = values.name
+                            UserModel.password = values.password
 
                         }}
 

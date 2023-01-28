@@ -1,8 +1,6 @@
-import { Button, Box, Typography } from '@mui/material'
+import { Button, Box, Typography, Avatar } from '@mui/material'
 import { observer } from 'mobx-react-lite';
 import UserModal from 'modals/User.model';
-// import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-// import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/consts/routes';
 
@@ -35,12 +33,12 @@ function Header() {
                 </Box>
                 <Typography>{UserModal.name}</Typography>
                 <Box sx={{ display: 'flex', gap: '20px' }}>
-                    {/* <Button variant="outlined" startIcon={<AssignmentIndIcon />}>
-                        Sign in
-                    </Button> */}
+                  
                     <SignInModal />
                     <SignUpModal />
-
+                    <Link to={ROUTES.PROFILE}> 
+                    <Avatar alt="Travis Howard" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNTm_W1tsgC3Dvt4S8tV_GbmIkwBPLkFR7eg&usqp=CAU" />
+                    </Link>
                 </Box>
             </Box>
         </>

@@ -1,0 +1,1 @@
+export {nameValidation, emailValidation, passwordValidation} from './validation.js'
