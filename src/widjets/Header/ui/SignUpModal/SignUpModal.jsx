@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup'
 import { FormInput, FormSelect } from 'shared/ui';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { UserModel } from 'modals';
 
 const experience = [
     {key:'one', value: 1},
@@ -93,6 +94,7 @@ function SignUpModal() {
                         validationSchema={validationSchema}
                         onSubmit={(values) => {
                             console.log(values)
+                            UserModel.signUp(values)
 
                         }}
 
